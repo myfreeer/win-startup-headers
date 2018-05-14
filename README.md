@@ -11,7 +11,7 @@ and append `-nostartfiles` to your compiler parameters.
 ### Windows Applications
 Windows Applications use `WinMain` entry point for ansi and `wWinMain` entry point for unicode.
 
-Include `winmain.h` and append `-nostartfiles -mwindows` to your compiler parameters.
+Include `winmain.h` and append `-nostartfiles -mwindows -lshlwapi` to your compiler parameters.
 
 ### Note
 `commandlinetoargva.h` is **NOT** required for a unicode compilation.

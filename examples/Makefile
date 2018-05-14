@@ -8,6 +8,8 @@ EXTRA_CFLAGS = -fno-ident -fno-stack-protector -fomit-frame-pointer \
 	-fno-unwind-tables -falign-functions=1 -falign-jumps=1 -falign-loops=1 \
 	-ffunction-sections -fdata-sections  -fno-math-errno
 
+WINDOW_CFLAGS = -mwindows -lshlwapi
+
 ifneq (,$(findstring x86_64-w64-,$(CHOST)))
     EXTRA_CFLAGS += -Wl,-T,../ldscripts/x86_64.ldscript
 else ifneq (,$(findstring i686-w64-,$(CHOST)))
@@ -25,8 +27,8 @@ console.exe: console.c ../main.h ../commandlinetoargva.h
 helloworld.exe: helloworld.c ../mainv.h ../commandlinetoargva.h
 	$(CC) $< -o $@ $(CFLAGS) $(EXTRA_CFLAGS) -I..
 
-hello_win.exe: hello_win.c ../winmain.h ../commandlinetoargva.h
-	$(CC) $< -o $@ $(CFLAGS) $(EXTRA_CFLAGS) -mwindows -I..
+hello_win.exe: hello_win.c ../winmain.h
+	$(CC) $< -o $@ $(CFLAGS) $(EXTRA_CFLAGS) $(WINDOW_CFLAGS) -I..
 
 %.exe: %.c
 	$(CC) $< -o $@ $(CFLAGS) $(EXTRA_CFLAGS) -I..
